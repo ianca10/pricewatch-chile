@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PriceWatch Chile</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#141c30;--panel2:#1b2740;--line:#2a3855;--muted:#9aa9c2;--text:#f4f7ff;--green:#55d6a1;--blue:#8ab4ff;--yellow:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182747 0,#0b1020 48%);color:var(--text);font:15px/1.5 Inter,system-ui,Segoe UI,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:28px 20px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#73e2b5,#5d8eff);display:grid;place-items:center;color:#071326;font-size:22px}
+.pill{border:1px solid #315b50;color:var(--green);background:#102b29;padding:6px 11px;border-radius:999px;font-size:12px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;letter-spacing:-.04em}p{color:var(--muted);margin:0}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px}.hero p{max-width:580px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+.stat,.card,.panel{background:linear-gradient(160deg,#17223a,#111a2d);border:1px solid var(--line);border-radius:18px}
+.stat{padding:17px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:4px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:28px 0 14px}.toolbar h2{margin:0;font-size:20px}
+button{border:0;border-radius:11px;padding:11px 15px;background:linear-gradient(135deg,#75e0b4,#8ab4ff);color:#071326;font-weight:750;cursor:pointer}
+button.secondary{background:#22314e;color:var(--text);border:1px solid var(--line)}button.danger{background:#3b202c;color:#ffc0ca;border:1px solid #633344}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{padding:18px;min-width:0}.cardhead{display:flex;justify-content:space-between;gap:12px;align-items:start}.device{font-size:30px;background:#202e49;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;margin-bottom:13px}
+.card h3{margin:0 0 5px;font-size:18px}.sub{font-size:12px;color:var(--muted)}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:#203d39;color:var(--green);white-space:nowrap}
+.price{font-size:27px;font-weight:800;margin:18px 0 2px}.pending{font-size:13px;color:var(--yellow)}.details{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.detail{background:#10192b;border-radius:11px;padding:10px}.detail small{display:block;color:var(--muted);font-size:11px}.detail b{font-size:13px}
+.cardfoot{display:flex;justify-content:space-between;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:12px}.link{color:var(--blue);font-size:12px;text-decoration:none}
+.empty{padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;grid-column:1/-1}
+.note{margin-top:22px;padding:15px 17px;border:1px solid #66522e;background:#2b2418;border-radius:14px;color:#f5dca9;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#050914cc;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.show{display:flex}.dialog{width:min(520px,100%);background:#141e33;border:1px solid var(--line);border-radius:18px;padding:22px}.dialog h2{margin:0 0 16px}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0d1628;color:var(--text);font:inherit}
+.check{display:flex;align-items:center;gap:9px;margin:14px 0;color:var(--text)}.check input{width:auto}.actions{display:flex;justify-content:end;gap:9px;margin-top:18px}
+@media(max-width:700px){.hero{display:block}.hero .pill{display:inline-block;margin-top:14px}.stats{grid-template-columns:1fr}.products{grid-template-columns:1fr}.toolbar{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">↘</div><div>PRICEWATCH <span style="color:var(--blue)">CHILE</span></div></div>
+    <span class="pill">● Panel personal</span>
+  </header>
+  <section class="hero">
+    <div><h1>Que no se te escape<br>una buena oferta.</h1><p>Tu centro de seguimiento para comparar precios, tiendas y opciones de financiamiento en Chile.</p></div>
+    <span class="pill">CLP · Chile</span>
+  </section>
+  <section class="stats">
+    <div class="stat"><small>PRODUCTOS EN SEGUIMIENTO</small><strong id="count">2</strong></div>
+    <div class="stat"><small>PRECIO MÁS RECIENTE</small><strong>Por consultar</strong></div>
+    <div class="stat"><small>ÚLTIMA REVISIÓN</small><strong>Pendiente</strong></div>
+  </section>
+  <div class="toolbar"><h2>Mis productos</h2><button id="add">＋ Agregar producto</button></div>
+  <section class="products" id="products"></section>
+  <div class="note"><b>Importante:</b> esta es la primera versión visual del panel. Guarda tus productos en este navegador, pero todavía no consulta tiendas automáticamente ni envía alertas. Para eso hay que conectar un servicio de monitoreo y publicar la web en un hosting.</div>
+</div>
+<div class="modal" id="modal">
+  <div class="dialog">
+    <h2>Agregar producto</h2>
+    <form id="form">
+      <label for="name">Nombre del producto</label><input id="name" required placeholder="Ej. Audífonos inalámbricos">
+      <label for="url">Enlace del producto (opcional)</label><input id="url" type="url" placeholder="https://tienda.cl/producto">
+      <label for="target">Avisarme si llega a este precio (CLP, opcional)</label><input id="target" type="number" min="1" placeholder="Ej. 599990">
+      <label class="check"><input id="installments" type="checkbox"> Priorizar 24 cuotas sin interés</label>
+      <div class="actions"><button type="button" class="secondary" id="cancel">Cancelar</button><button type="submit">Guardar producto</button></div>
+    </form>
+  </div>
+</div>
+<script>
+const starter=[
+ {id:1,name:"Apple iPhone 18 Pro Max",url:"",target:"",installments:true,emoji:"📱"},
+ {id:2,name:"Apple iPhone 17e",url:"",target:"",installments:true,emoji:"📱"}
+];
+let items=JSON.parse(localStorage.getItem("pw-products")||"null")||starter;
+const $=s=>document.querySelector(s);
+function save(){localStorage.setItem("pw-products",JSON.stringify(items));render()}
+function money(n){return n?new Intl.NumberFormat("es-CL",{style:"currency",currency:"CLP",maximumFractionDigits:0}).format(n):"Sin definir"}
+function render(){
+ $("#count").textContent=items.length;
+ const root=$("#products");
+ if(!items.length){root.innerHTML='<div class="empty">Todavía no tienes productos. Agrega uno para comenzar.</div>';return}
+ root.innerHTML=items.map(p=>`<article class="card">
+  <div class="cardhead"><div><div class="device">${p.emoji||"🛍️"}</div><h3>${escapeHtml(p.name)}</h3><div class="sub">Seguimiento de precio · Chile</div></div><span class="tag">${p.installments?"24 cuotas prioritarias":"Monitoreando"}</span></div>
+  <div class="price">—</div><div class="pending">Precio pendiente de conexión a tiendas</div>
+  <div class="details"><div class="detail"><small>PRECIO OBJETIVO</small><b>${p.target?money(p.target):"No definido"}</b></div><div class="detail"><small>FINANCIAMIENTO</small><b>${p.installments?"Buscar 24 cuotas S/I":"Sin preferencia"}</b></div></div>
+  <div class="cardfoot">${p.url?`<a class="link" href="${escapeAttr(p.url)}" target="_blank" rel="noopener">Abrir producto ↗</a>`:'<span class="sub">Sin enlace agregado</span>'}<button class="danger" data-remove="${p.id}">Quitar</button></div>
+ </article>`).join("");
+ root.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{items=items.filter(x=>x.id!=b.dataset.remove);save()});
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return escapeHtml(s)}
+$("#add").onclick=()=>$("#modal").classList.add("show");
+$("#cancel").onclick=()=>$("#modal").classList.remove("show");
+$("#form").onsubmit=e=>{e.preventDefault();items.push({id:Date.now(),name:$("#name").value.trim(),url:$("#url").value.trim(),target:$("#target").value,installments:$("#installments").checked,emoji:"🛍️"});save();e.target.reset();$("#modal").classList.remove("show")};
+render();
+</script>
+</body>
+</html>
